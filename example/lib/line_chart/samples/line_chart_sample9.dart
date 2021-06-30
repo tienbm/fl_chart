@@ -3,87 +3,112 @@ import 'package:flutter/material.dart';
 import 'dart:math';
 
 // ignore: must_be_immutable
-class LineChartSample9 extends StatelessWidget {
-  final spots = List.generate(101, (i) => (i - 50) / 10).map((x) => FlSpot(x, sin(x))).toList();
-
+class LineChartSample9 extends StatefulWidget {
   LineChartSample9();
 
   @override
+  _LineChartSample9State createState() => _LineChartSample9State();
+}
+
+class _LineChartSample9State extends State<LineChartSample9> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Container(
+    return Center(
       child: Padding(
-        padding: const EdgeInsets.only(right: 22.0, bottom: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 30),
         child: SizedBox(
-          width: 400,
-          height: 400,
+          width: double.infinity,
+          height: 90,
           child: LineChart(
             LineChartData(
-              lineTouchData: LineTouchData(
-                touchTooltipData: LineTouchTooltipData(
-                    maxContentWidth: 100,
-                    tooltipBgColor: Colors.orange,
-                    getTooltipItems: (touchedSpots) {
-                      return touchedSpots.map((LineBarSpot touchedSpot) {
-                        final textStyle = TextStyle(
-                          color: touchedSpot.bar.colors[0],
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14,
+                lineTouchData: LineTouchData(
+                  touchTooltipData: LineTouchTooltipData(
+                      maxContentWidth: 100,
+                      tooltipBgColor: Colors.orange,
+                      getTooltipItems: (touchedSpots) {
+                        return touchedSpots.map((LineBarSpot touchedSpot) {
+                          final textStyle = TextStyle(
+                            color: touchedSpot.bar.colors[0],
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
+                          );
+                          return LineTooltipItem(
+                              '${touchedSpot.x}, ${touchedSpot.y.toStringAsFixed(2)}',
+                              textStyle);
+                        }).toList();
+                      }),
+                  handleBuiltInTouches: true,
+                  getTouchLineStart: (data, index) => 0,
+                ),
+                lineBarsData: [
+                  LineChartBarData(
+                    colors: [
+                      Colors.black,
+                    ],
+                    isStepLineChart: true,
+                    lineChartStepData: LineChartStepData(stepDirection: 0.65),
+                    spots: [
+                      FlSpot(
+                        0,
+                        10,
+                      ),
+                      FlSpot(
+                        1,
+                        1,
+                      ),
+                      FlSpot(
+                        2,
+                        3,
+                      ),
+                      FlSpot(
+                        3,
+                        4,
+                      ),
+                      FlSpot(
+                        4,
+                        9,
+                      )
+                    ],
+                    isCurved: true,
+                    isStrokeCapRound: true,
+                    barWidth: 1.5,
+                    belowBarData: BarAreaData(
+                      show: true,
+                      colors: [
+                        const Color(0xFFF4FBF7),
+                        const Color(0xFFFFFFFF),
+                      ],
+                      gradientTo: const Offset(0.0, 1.0),
+                      gradientFrom: const Offset(0.0, 0.5),
+                    ),
+                    dotData: FlDotData(
+                      show: true,
+                      getDotPainter: (spot, percent, barData, index) {
+                        return FlDotCirclePainter(
+                          radius: 1,
+                          color: Color(0xFF00C805),
+                          strokeWidth: 1,
+                          strokeColor: Color(0xFF00C805),
                         );
-                        return LineTooltipItem(
-                            '${touchedSpot.x}, ${touchedSpot.y.toStringAsFixed(2)}', textStyle);
-                      }).toList();
-                    }),
-                handleBuiltInTouches: true,
-                getTouchLineStart: (data, index) => 0,
-              ),
-              lineBarsData: [
-                LineChartBarData(
-                  colors: [
-                    Colors.black,
-                  ],
-                  spots: spots,
-                  isCurved: true,
-                  isStrokeCapRound: true,
-                  barWidth: 3,
-                  belowBarData: BarAreaData(
-                    show: false,
+                      },
+                    ),
                   ),
-                  dotData: FlDotData(show: false),
+                ],
+                minY: 0,
+                maxY: 10,
+                titlesData: FlTitlesData(
+                  leftTitles: SideTitles(showTitles: false),
+                  rightTitles: SideTitles(showTitles: false),
+                  bottomTitles: SideTitles(showTitles: false),
+                  topTitles: SideTitles(showTitles: false),
                 ),
-              ],
-              minY: -1.5,
-              maxY: 1.5,
-              titlesData: FlTitlesData(
-                leftTitles: SideTitles(
-                  showTitles: true,
-                  getTextStyles: (value) => const TextStyle(
-                      color: Colors.blueGrey, fontWeight: FontWeight.bold, fontSize: 18),
-                  margin: 16,
-                ),
-                rightTitles: SideTitles(showTitles: false),
-                bottomTitles: SideTitles(
-                  showTitles: true,
-                  getTextStyles: (value) => const TextStyle(
-                      color: Colors.blueGrey, fontWeight: FontWeight.bold, fontSize: 18),
-                  margin: 16,
-                ),
-                topTitles: SideTitles(showTitles: false),
-              ),
-              gridData: FlGridData(
-                show: true,
-                drawHorizontalLine: true,
-                drawVerticalLine: true,
-                horizontalInterval: 1.5,
-                verticalInterval: 5,
-                checkToShowHorizontalLine: (value) {
-                  return value.toInt() == 0;
-                },
-                checkToShowVerticalLine: (value) {
-                  return value.toInt() == 0;
-                },
-              ),
-              borderData: FlBorderData(show: false),
-            ),
+                borderData: FlBorderData(show: false),
+                gridData: FlGridData(show: false)),
           ),
         ),
       ),

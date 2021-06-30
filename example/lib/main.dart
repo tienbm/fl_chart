@@ -10,6 +10,7 @@ import 'line_chart/line_chart_page.dart';
 import 'line_chart/line_chart_page2.dart';
 import 'line_chart/line_chart_page3.dart';
 import 'line_chart/line_chart_page4.dart';
+import 'line_chart/samples/line_chart_sample9.dart';
 import 'pie_chart/pie_chart_page.dart';
 import 'scatter_chart/scatter_chart_page.dart';
 
@@ -71,12 +72,14 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
-        child: PageView(
-          physics: kIsWeb ? NeverScrollableScrollPhysics() : AlwaysScrollableScrollPhysics(),
-          controller: _controller,
-          children: _pages,
-        ),
+        child: LineChartSample9(),
+        // child: PageView(
+        //   physics: kIsWeb ? NeverScrollableScrollPhysics() : AlwaysScrollableScrollPhysics(),
+        //   controller: _controller,
+        //   children: _pages,
+        // ),
       ),
       bottomNavigationBar: kIsWeb
           ? Container(
@@ -88,7 +91,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   Visibility(
                     visible: _currentPage != 0,
                     child: FloatingActionButton(
-                      onPressed: () => _controller.previousPage(duration: _duration, curve: _curve),
+                      onPressed: () => _controller.previousPage(
+                          duration: _duration, curve: _curve),
                       child: Icon(Icons.chevron_left_rounded),
                     ),
                   ),
@@ -96,7 +100,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   Visibility(
                     visible: _currentPage != _pages.length - 1,
                     child: FloatingActionButton(
-                      onPressed: () => _controller.nextPage(duration: _duration, curve: _curve),
+                      onPressed: () => _controller.nextPage(
+                          duration: _duration, curve: _curve),
                       child: Icon(Icons.chevron_right_rounded),
                     ),
                   ),
