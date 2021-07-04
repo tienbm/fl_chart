@@ -29,6 +29,9 @@ class LineChartPainter extends AxisChartPainter<LineChartData> {
       _bgTouchTooltipPaint,
       _imagePaint;
 
+  Offset? touched;
+  late Size size;
+
   /// Paints [data] into canvas, it is the animating [LineChartData],
   /// [targetData] is the animation's target and remains the same
   /// during animation, then we should use it  when we need to show
@@ -69,7 +72,7 @@ class LineChartPainter extends AxisChartPainter<LineChartData> {
     if (data.lineBarsData.isEmpty) {
       return;
     }
-
+    print('paint line chart');
     if (data.clipData.any) {
       canvasWrapper.saveLayer(
         Rect.fromLTWH(0, -40, canvasWrapper.size.width + 40,
@@ -108,6 +111,17 @@ class LineChartPainter extends AxisChartPainter<LineChartData> {
       _drawTouchedSpotsIndicator(canvasWrapper, barData, holder);
     }
 
+    ///Vẽ theo điểm chạm
+    if (touched != null) {
+      _drawTouchedLine(touched!, canvasWrapper, holder);
+      // _drawTouchTooltip(
+      //   canvasWrapper,
+      //   data.lineTouchData.touchTooltipData,
+      //   FlSpot(touched!.dx, touched!.dy),
+      //   data.showingTooltipIndicators.first,
+      //   holder,
+      // );
+    }
     if (data.clipData.any) {
       canvasWrapper.restore();
     }
@@ -132,13 +146,13 @@ class LineChartPainter extends AxisChartPainter<LineChartData> {
       }
       tooltipSpots = ShowingTooltipIndicators(barSpots);
 
-      _drawTouchTooltip(
-        canvasWrapper,
-        data.lineTouchData.touchTooltipData,
-        topSpot,
-        tooltipSpots,
-        holder,
-      );
+      // _drawTouchTooltip(
+      //   canvasWrapper,
+      //   data.lineTouchData.touchTooltipData,
+      //   topSpot,
+      //   tooltipSpots,
+      //   holder,
+      // );
     }
   }
 
@@ -277,6 +291,20 @@ class LineChartPainter extends AxisChartPainter<LineChartData> {
     }
   }
 
+  void _drawTouchedLine(
+    Offset offset,
+    CanvasWrapper canvasWrapper,
+    PaintHolder<LineChartData> holder,
+  ) {
+    _touchLinePaint.color = Colors.grey;
+    _touchLinePaint.strokeWidth = 1;
+    _touchLinePaint.transparentIfWidthIsZero();
+    final incr = canvasWrapper.size;
+    final lineStart = Offset(offset.dx, 6.0);
+    final lineEnd = Offset(offset.dx, canvasWrapper.size.height - 6.0);
+    canvasWrapper.drawDashedLine(lineStart, lineEnd, _touchLinePaint, null);
+  }
+
   void _drawTouchedSpotsIndicator(
     CanvasWrapper canvasWrapper,
     LineChartBarData barData,
@@ -349,13 +377,13 @@ class LineChartPainter extends AxisChartPainter<LineChartData> {
         }
       }
 
-      _touchLinePaint.color = indicatorData.indicatorBelowLine.color;
-      _touchLinePaint.strokeWidth =
-          indicatorData.indicatorBelowLine.strokeWidth;
-      _touchLinePaint.transparentIfWidthIsZero();
+      // _touchLinePaint.color = indicatorData.indicatorBelowLine.color;
+      // _touchLinePaint.strokeWidth =
+      //     indicatorData.indicatorBelowLine.strokeWidth;
+      // _touchLinePaint.transparentIfWidthIsZero();
 
-      canvasWrapper.drawDashedLine(lineStart, lineEnd, _touchLinePaint,
-          indicatorData.indicatorBelowLine.dashArray);
+      // canvasWrapper.drawDashedLine(lineStart, lineEnd, _touchLinePaint,
+      //     indicatorData.indicatorBelowLine.dashArray);
 
       /// Draw the indicator dot
       if (showingDots) {
@@ -1487,6 +1515,12 @@ class LineChartPainter extends AxisChartPainter<LineChartData> {
     PaintHolder<LineChartData> holder,
   ) {
     final data = holder.data;
+    this.size = size;
+    if (touchInput is PointerUpEvent) {
+      touched = null;
+    } else {
+      touched = touchInput.localPosition;
+    }
 
     /// it holds list of nearest touched spots of each line
     /// and we use it to draw touch stuff on them

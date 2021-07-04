@@ -1,3 +1,5 @@
+import 'package:example/line_chart/samples/line_chart_sample1.dart';
+import 'package:example/line_chart/samples/line_chart_sample2.dart';
 import 'package:example/radar_chart/radar_chart_page.dart';
 import 'package:example/scatter_chart/scatter_chart_page.dart';
 import 'package:flutter/foundation.dart';
@@ -10,6 +12,7 @@ import 'line_chart/line_chart_page.dart';
 import 'line_chart/line_chart_page2.dart';
 import 'line_chart/line_chart_page3.dart';
 import 'line_chart/line_chart_page4.dart';
+import 'line_chart/samples/line_chart_sample3.dart';
 import 'line_chart/samples/line_chart_sample9.dart';
 import 'pie_chart/pie_chart_page.dart';
 import 'scatter_chart/scatter_chart_page.dart';

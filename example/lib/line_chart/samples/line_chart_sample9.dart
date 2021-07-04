@@ -1,6 +1,5 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'dart:math';
 
 // ignore: must_be_immutable
 class LineChartSample9 extends StatefulWidget {
@@ -20,7 +19,7 @@ class _LineChartSample9State extends State<LineChartSample9> {
   Widget build(BuildContext context) {
     return Center(
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 30),
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: SizedBox(
           width: double.infinity,
           height: 90,
@@ -28,22 +27,25 @@ class _LineChartSample9State extends State<LineChartSample9> {
             LineChartData(
                 lineTouchData: LineTouchData(
                   touchTooltipData: LineTouchTooltipData(
-                      maxContentWidth: 100,
-                      tooltipBgColor: Colors.orange,
-                      getTooltipItems: (touchedSpots) {
-                        return touchedSpots.map((LineBarSpot touchedSpot) {
-                          final textStyle = TextStyle(
-                            color: touchedSpot.bar.colors[0],
-                            fontWeight: FontWeight.bold,
-                            fontSize: 14,
-                          );
-                          return LineTooltipItem(
-                              '${touchedSpot.x}, ${touchedSpot.y.toStringAsFixed(2)}',
-                              textStyle);
-                        }).toList();
-                      }),
-                  handleBuiltInTouches: true,
+                    tooltipBgColor: Colors.transparent,
+                    fitInsideHorizontally: true,
+                    tooltipPadding: EdgeInsets.only(bottom: -2),
+                    showOnTopOfTheChartBoxArea: true,
+                    getTooltipItems: (touchedSpots) {
+                      final spot = touchedSpots.first;
+                      final textStyle = TextStyle().copyWith(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                          color: Color(0xFFADADAD));
+
+                      return [
+                        LineTooltipItem(
+                            '${spot.spotIndex.toString()}', textStyle)
+                      ];
+                    },
+                  ),
                   getTouchLineStart: (data, index) => 0,
+                  getTouchLineEnd: (data, index) => 10,
                 ),
                 lineBarsData: [
                   LineChartBarData(
@@ -54,23 +56,43 @@ class _LineChartSample9State extends State<LineChartSample9> {
                     lineChartStepData: LineChartStepData(stepDirection: 0.65),
                     spots: [
                       FlSpot(
-                        0,
+                        2,
                         10,
                       ),
+                      // FlSpot(
+                      //   1,
+                      //   1,
+                      // ),
+                      // FlSpot(
+                      //   2,
+                      //   3,
+                      // ),
+                      // FlSpot(
+                      //   3,
+                      //   4,
+                      // ),
                       FlSpot(
-                        1,
-                        1,
-                      ),
-                      FlSpot(
-                        2,
-                        3,
-                      ),
-                      FlSpot(
-                        3,
                         4,
+                        9,
                       ),
+                      // FlSpot(
+                      //   5,
+                      //   10,
+                      // ),
+                      // FlSpot(
+                      //   6,
+                      //   1,
+                      // ),
+                      // FlSpot(
+                      //   7,
+                      //   3,
+                      // ),
+                      // FlSpot(
+                      //   8,
+                      //   4,
+                      // ),
                       FlSpot(
-                        4,
+                        9,
                         9,
                       )
                     ],
@@ -100,7 +122,7 @@ class _LineChartSample9State extends State<LineChartSample9> {
                   ),
                 ],
                 minY: 0,
-                maxY: 10,
+                maxY: 12,
                 titlesData: FlTitlesData(
                   leftTitles: SideTitles(showTitles: false),
                   rightTitles: SideTitles(showTitles: false),
