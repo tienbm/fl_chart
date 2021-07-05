@@ -110,7 +110,9 @@ class RenderLineChart extends RenderBox {
       return;
     }
     var response = LineTouchResponse(null, event, false);
-    markNeedsPaint();
+    if (data.lineTouchData.enabled) {
+      markNeedsPaint();
+    }
     var touchedSpots = _painter.handleTouch(event, size, paintHolder);
     if (touchedSpots == null || touchedSpots.isEmpty) {
       _touchCallback?.call(response);
