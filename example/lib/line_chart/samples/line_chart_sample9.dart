@@ -40,12 +40,33 @@ class _LineChartSample9State extends State<LineChartSample9> {
 
                       return [
                         LineTooltipItem(
-                            '${spot.spotIndex.toString()}', textStyle)
+                            'spot.spotIndex ${spot.x} - ${spot.y}', textStyle)
                       ];
                     },
                   ),
+                  touchSpotThreshold: 3.0,
                   getTouchLineStart: (data, index) => 0,
                   getTouchLineEnd: (data, index) => 10,
+                  getTouchedSpotIndicator: (barData, spotIndexes) {
+                    return spotIndexes.map((spotIndex) {
+                      return TouchedSpotIndicatorData(
+                        FlLine(
+                          color: Color(0xFFC4C4C4).withOpacity(0.3),
+                          strokeWidth: 1,
+                        ),
+                        FlDotData(
+                          getDotPainter: (spot, percent, barData, index) {
+                            return FlDotCirclePainter(
+                              radius: 2,
+                              color: Color(0xFF00C805),
+                              strokeWidth: 2,
+                              strokeColor: Color(0xFF00C805),
+                            );
+                          },
+                        ),
+                      );
+                    }).toList();
+                  },
                 ),
                 lineBarsData: [
                   LineChartBarData(
@@ -109,13 +130,13 @@ class _LineChartSample9State extends State<LineChartSample9> {
                       gradientFrom: const Offset(0.0, 0.5),
                     ),
                     dotData: FlDotData(
-                      show: true,
+                      show: false,
                       getDotPainter: (spot, percent, barData, index) {
                         return FlDotCirclePainter(
-                          radius: 1,
-                          color: Color(0xFF00C805),
-                          strokeWidth: 1,
-                          strokeColor: Color(0xFF00C805),
+                          radius: 2,
+                          color: Colors.blue,
+                          strokeWidth: 2,
+                          strokeColor: Colors.red,
                         );
                       },
                     ),

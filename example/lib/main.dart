@@ -13,6 +13,7 @@ import 'line_chart/line_chart_page2.dart';
 import 'line_chart/line_chart_page3.dart';
 import 'line_chart/line_chart_page4.dart';
 import 'line_chart/samples/line_chart_sample3.dart';
+import 'line_chart/samples/line_chart_sample5.dart';
 import 'line_chart/samples/line_chart_sample9.dart';
 import 'pie_chart/pie_chart_page.dart';
 import 'scatter_chart/scatter_chart_page.dart';

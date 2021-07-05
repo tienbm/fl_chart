@@ -2,7 +2,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
 class LineChartSample5 extends StatelessWidget {
-  final List<int> showIndexes = const [1, 3, 5];
+  final List<int> showIndexes = const [1, 2, 3, 5, 6];
   final List<FlSpot> allSpots = [
     FlSpot(0, 1),
     FlSpot(1, 2),
@@ -55,13 +55,14 @@ class LineChartSample5 extends StatelessWidget {
         LineChartData(
           showingTooltipIndicators: showIndexes.map((index) {
             return ShowingTooltipIndicators([
-              LineBarSpot(
-                  tooltipsOnBar, lineBarsData.indexOf(tooltipsOnBar), tooltipsOnBar.spots[index]),
+              LineBarSpot(tooltipsOnBar, lineBarsData.indexOf(tooltipsOnBar),
+                  tooltipsOnBar.spots[index]),
             ]);
           }).toList(),
           lineTouchData: LineTouchData(
             enabled: false,
-            getTouchedSpotIndicator: (LineChartBarData barData, List<int> spotIndexes) {
+            getTouchedSpotIndicator:
+                (LineChartBarData barData, List<int> spotIndexes) {
               return spotIndexes.map((index) {
                 return TouchedSpotIndicatorData(
                   FlLine(
@@ -69,9 +70,11 @@ class LineChartSample5 extends StatelessWidget {
                   ),
                   FlDotData(
                     show: true,
-                    getDotPainter: (spot, percent, barData, index) => FlDotCirclePainter(
+                    getDotPainter: (spot, percent, barData, index) =>
+                        FlDotCirclePainter(
                       radius: 8,
-                      color: lerpGradient(barData.colors, barData.colorStops!, percent / 100),
+                      color: lerpGradient(
+                          barData.colors, barData.colorStops!, percent / 100),
                       strokeWidth: 2,
                       strokeColor: Colors.black,
                     ),
@@ -86,7 +89,8 @@ class LineChartSample5 extends StatelessWidget {
                 return lineBarsSpot.map((lineBarSpot) {
                   return LineTooltipItem(
                     lineBarSpot.y.toString(),
-                    const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                    const TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.bold),
                   );
                 }).toList();
               },
@@ -129,8 +133,10 @@ class LineChartSample5 extends StatelessWidget {
           axisTitleData: FlAxisTitleData(
             rightTitle: AxisTitle(showTitle: true, titleText: 'count'),
             leftTitle: AxisTitle(showTitle: true, titleText: 'count'),
-            topTitle:
-                AxisTitle(showTitle: true, titleText: 'Wall clock', textAlign: TextAlign.left),
+            topTitle: AxisTitle(
+                showTitle: true,
+                titleText: 'Wall clock',
+                textAlign: TextAlign.left),
           ),
           gridData: FlGridData(show: false),
           borderData: FlBorderData(
