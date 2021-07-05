@@ -72,7 +72,6 @@ class LineChartPainter extends AxisChartPainter<LineChartData> {
     if (data.lineBarsData.isEmpty) {
       return;
     }
-    print('paint line chart');
     if (data.clipData.any) {
       canvasWrapper.saveLayer(
         Rect.fromLTWH(0, -40, canvasWrapper.size.width + 40,
@@ -300,8 +299,8 @@ class LineChartPainter extends AxisChartPainter<LineChartData> {
     _touchLinePaint.color = Colors.grey;
     _touchLinePaint.strokeWidth = 1;
     _touchLinePaint.transparentIfWidthIsZero();
-    final lineStart = Offset(offset.dx, 6.0);
-    final lineEnd = Offset(offset.dx, canvasWrapper.size.height - 6.0);
+    final lineStart = Offset(offset.dx, 0);
+    final lineEnd = Offset(offset.dx, canvasWrapper.size.height);
     canvasWrapper.drawDashedLine(lineStart, lineEnd, _touchLinePaint, null);
   }
 
