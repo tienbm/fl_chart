@@ -1,4 +1,5 @@
 import 'package:fl_chart/fl_chart.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
@@ -27,6 +28,17 @@ class _LineChartSample9State extends State<LineChartSample9> {
             LineChartData(
                 lineTouchData: LineTouchData(
                   enabled: true,
+                  touchCallback: (lineTouch) {
+                    final desiredTouch =
+                        lineTouch.touchInput is! PointerExitEvent &&
+                            lineTouch.touchInput is! PointerUpEvent;
+                    if (desiredTouch &&
+                        lineTouch.lineBarSpots != null &&
+                        lineTouch.lineBarSpots!.length > 0) {
+                      final spot = lineTouch.lineBarSpots!.first;
+                      print('spot.spotIndex ${spot.x} - ${spot.y}');
+                    }
+                  },
                   touchTooltipData: LineTouchTooltipData(
                     tooltipBgColor: Colors.transparent,
                     fitInsideHorizontally: true,
