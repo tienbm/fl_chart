@@ -26,6 +26,7 @@ class _LineChartSample9State extends State<LineChartSample9> {
           child: LineChart(
             LineChartData(
                 lineTouchData: LineTouchData(
+                  enabled: true,
                   touchTooltipData: LineTouchTooltipData(
                     tooltipBgColor: Colors.transparent,
                     fitInsideHorizontally: true,

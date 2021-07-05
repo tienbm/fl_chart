@@ -111,7 +111,7 @@ class LineChartPainter extends AxisChartPainter<LineChartData> {
     }
 
     ///Vẽ theo điểm chạm
-    if (touched != null) {
+    if (touched != null && data.lineTouchData.enabled) {
       _drawTouchedLine(touched!, canvasWrapper, holder);
       _drawTouchedTooltip(
         touched!,
@@ -296,6 +296,7 @@ class LineChartPainter extends AxisChartPainter<LineChartData> {
     CanvasWrapper canvasWrapper,
     PaintHolder<LineChartData> holder,
   ) {
+    if (offset.dx < -3 || offset.dx > canvasWrapper.size.width + 3) return;
     _touchLinePaint.color = Colors.grey;
     _touchLinePaint.strokeWidth = 1;
     _touchLinePaint.transparentIfWidthIsZero();
