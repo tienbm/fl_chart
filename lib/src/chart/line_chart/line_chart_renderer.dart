@@ -122,13 +122,18 @@ class RenderLineChart extends RenderBox {
 
     if (event is PointerDownEvent) {
       _lastTouchedSpots = touchedSpots;
+      _touchCallback?.call(response);
     } else if (event is PointerUpEvent) {
       if (_lastTouchedSpots == touchedSpots) {
         response = response.copyWith(clickHappened: true);
       }
       _lastTouchedSpots = null;
+      _touchCallback?.call(response);
+    } else {
+      if (_lastTouchedSpots?.first.spotIndex != touchedSpots.first.spotIndex) {
+        _lastTouchedSpots = touchedSpots;
+        _touchCallback?.call(response);
+      }
     }
-
-    _touchCallback?.call(response);
   }
 }

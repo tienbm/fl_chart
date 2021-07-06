@@ -32,11 +32,13 @@ class _LineChartSample9State extends State<LineChartSample9> {
                     final desiredTouch =
                         lineTouch.touchInput is! PointerExitEvent &&
                             lineTouch.touchInput is! PointerUpEvent;
-                    if (desiredTouch &&
+                    if (lineTouch.touchInput is PointerUpEvent) {
+                      print('onTouchEnd()');
+                    } else if (desiredTouch &&
                         lineTouch.lineBarSpots != null &&
                         lineTouch.lineBarSpots!.length > 0) {
                       final spot = lineTouch.lineBarSpots!.first;
-                      print('spot.spotIndex ${spot.x} - ${spot.y}');
+                      print('spot : ${spot.x}');
                     }
                   },
                   touchTooltipData: LineTouchTooltipData(
