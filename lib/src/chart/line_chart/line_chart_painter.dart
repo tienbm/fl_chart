@@ -106,13 +106,12 @@ class LineChartPainter extends AxisChartPainter<LineChartData> {
       if (data.extraLinesData.extraLinesOnTop) {
         _drawExtraLines(canvasWrapper, holder);
       }
-
-      _drawTouchedSpotsIndicator(canvasWrapper, barData, holder);
     }
 
     ///Vẽ theo điểm chạm
     if (touched != null && data.lineTouchData.enabled) {
       _drawTouchedLine(touched!, canvasWrapper, holder);
+      _drawTouchedSpotsIndicator(touched!, canvasWrapper, holder);
       _drawTouchedTooltip(
         touched!,
         canvasWrapper,
@@ -306,10 +305,11 @@ class LineChartPainter extends AxisChartPainter<LineChartData> {
   }
 
   void _drawTouchedSpotsIndicator(
+    Offset touched,
     CanvasWrapper canvasWrapper,
-    LineChartBarData barData,
     PaintHolder<LineChartData> holder,
   ) {
+    final barData = holder.data.lineBarsData[0];
     if (barData.showingIndicators.isEmpty) {
       return;
     }
@@ -343,7 +343,8 @@ class LineChartPainter extends AxisChartPainter<LineChartData> {
           getPixelY(spot.y, chartViewSize, holder));
 
       /// For drawing the dot
-      final showingDots = indicatorData.touchedSpotDotData.show;
+      final showingDots = (touched.dx - touchedSpot.dx).abs() <=
+          data.lineTouchData.touchSpotThreshold;
       var dotHeight = 0.0;
       late FlDotPainter dotPainter;
 
@@ -1670,7 +1671,7 @@ class LineChartPainter extends AxisChartPainter<LineChartData> {
       final barData = data.lineBarsData[i];
 
       // find the nearest spot on touch area in this bar line
-      final foundTouchedSpot = _getNearestTouchedSpot(
+      final foundTouchedSpot = _getLeftTouchedSpot(
           size, touchInput.localPosition, barData, i, holder);
       if (foundTouchedSpot != null) {
         touchedSpots.add(foundTouchedSpot);
