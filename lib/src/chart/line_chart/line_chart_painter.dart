@@ -1671,10 +1671,19 @@ class LineChartPainter extends AxisChartPainter<LineChartData> {
       final barData = data.lineBarsData[i];
 
       // find the nearest spot on touch area in this bar line
-      final foundTouchedSpot = _getLeftTouchedSpot(
-          size, touchInput.localPosition, barData, i, holder);
-      if (foundTouchedSpot != null) {
-        touchedSpots.add(foundTouchedSpot);
+      if (barData.isStepLineChart) {
+        final foundTouchedSpot = _getLeftTouchedSpot(
+            size, touchInput.localPosition, barData, i, holder);
+
+        if (foundTouchedSpot != null) {
+          touchedSpots.add(foundTouchedSpot);
+        }
+      } else {
+        final foundTouchedSpot = _getNearestTouchedSpot(
+            size, touchInput.localPosition, barData, i, holder);
+        if (foundTouchedSpot != null) {
+          touchedSpots.add(foundTouchedSpot);
+        }
       }
     }
 
