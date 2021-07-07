@@ -1259,7 +1259,12 @@ class LineChartPainter extends AxisChartPainter<LineChartData> {
       LineTouchTooltipData tooltipData, PaintHolder<LineChartData> holder) {
     final viewSize = canvasWrapper.size;
     final barData = holder.data.lineBarsData[0];
-    var spot = _getLeftTouchedSpot(viewSize, offset, barData, 0, holder);
+    LineBarSpot? spot;
+    if (barData.isStepLineChart) {
+      spot = _getLeftTouchedSpot(viewSize, offset, barData, 0, holder);
+    } else {
+      spot = _getNearestTouchedSpot(viewSize, offset, barData, 0, holder);
+    }
     if (spot == null) return;
     const textsBelowMargin = 4;
 
