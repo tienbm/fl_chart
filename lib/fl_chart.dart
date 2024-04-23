@@ -1,4 +1,4 @@
-library fl_chart;
+library fl_chart_tbm;
 
 export 'src/chart/bar_chart/bar_chart.dart';
 export 'src/chart/bar_chart/bar_chart_data.dart';
