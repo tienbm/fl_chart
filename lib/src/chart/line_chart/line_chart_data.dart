@@ -1538,7 +1538,7 @@ class LineTouchTooltipData with EquatableMixin {
     bool? fitInsideHorizontally,
     bool? fitInsideVertically,
     bool? showOnTopOfTheChartBoxArea,
-    this.tooltipBorder = BorderSide.none,
+    BorderSide? tooltipBorder,
   })  : tooltipBgColor = tooltipBgColor ?? Colors.white,
         tooltipRoundedRadius = tooltipRoundedRadius ?? 4,
         tooltipPadding = tooltipPadding ?? const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -1548,6 +1548,7 @@ class LineTouchTooltipData with EquatableMixin {
         fitInsideHorizontally = fitInsideHorizontally ?? false,
         fitInsideVertically = fitInsideVertically ?? false,
         showOnTopOfTheChartBoxArea = showOnTopOfTheChartBoxArea ?? false,
+        tooltipBorder = BorderSide.none,
         super();
 
   /// Used for equality check, see [EquatableMixin].
