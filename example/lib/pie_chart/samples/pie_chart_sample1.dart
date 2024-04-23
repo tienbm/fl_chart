@@ -1,4 +1,4 @@
-import 'package:fl_chart/fl_chart.dart';
+import 'package:fl_chart/fl_chart_tbm.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'indicator.dart';

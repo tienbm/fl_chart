@@ -1,4 +1,4 @@
-import 'package:fl_chart/fl_chart.dart';
+import 'package:fl_chart/fl_chart_tbm.dart';
 import 'package:fl_chart/src/chart/radar_chart/radar_chart_painter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_test/flutter_test.dart';
