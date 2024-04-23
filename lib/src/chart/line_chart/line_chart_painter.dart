@@ -27,6 +27,7 @@ class LineChartPainter extends AxisChartPainter<LineChartData> {
       _extraLinesPaint,
       _touchLinePaint,
       _bgTouchTooltipPaint,
+      _borderTouchTooltipPaint,
       _imagePaint;
 
   Offset? touched;
@@ -61,6 +62,11 @@ class LineChartPainter extends AxisChartPainter<LineChartData> {
     _bgTouchTooltipPaint = Paint()
       ..style = PaintingStyle.fill
       ..color = Colors.white;
+
+    _borderTouchTooltipPaint = Paint()
+      ..style = PaintingStyle.stroke
+      ..color = Colors.transparent
+      ..strokeWidth = 1.0;
 
     _imagePaint = Paint();
   }
@@ -1383,7 +1389,10 @@ class LineChartPainter extends AxisChartPainter<LineChartData> {
         bottomLeft: radius,
         bottomRight: radius);
     _bgTouchTooltipPaint.color = tooltipData.tooltipBgColor;
-    canvasWrapper.drawRRect(roundedRect, _bgTouchTooltipPaint);
+
+    canvasWrapper
+      ..drawRRect(roundedRect, _bgTouchTooltipPaint)
+      ..drawRRect(roundedRect, _borderTouchTooltipPaint);
 
     /// draw the texts one by one in below of each other
     var topPosSeek = tooltipData.tooltipPadding.top;
@@ -1396,6 +1405,13 @@ class LineChartPainter extends AxisChartPainter<LineChartData> {
       topPosSeek += tp.height;
       topPosSeek += textsBelowMargin;
     }
+
+    if (tooltipData.tooltipBorder != BorderSide.none) {
+      _borderTouchTooltipPaint
+        ..color = tooltipData.tooltipBorder.color
+        ..strokeWidth = tooltipData.tooltipBorder.width;
+    }
+
   }
 
   void _drawTouchTooltip(

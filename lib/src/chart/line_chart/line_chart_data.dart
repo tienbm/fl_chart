@@ -1513,7 +1513,8 @@ class LineTouchTooltipData with EquatableMixin {
 
   /// Forces the tooltip container to top of the line, default 'false'
   final bool showOnTopOfTheChartBoxArea;
-
+  /// The tooltip border color.
+  final BorderSide tooltipBorder;
   /// if [LineTouchData.handleBuiltInTouches] is true,
   /// [LineChart] shows a tooltip popup on top of spots automatically when touch happens,
   /// otherwise you can show it manually using [LineChartData.showingTooltipIndicators].
@@ -1537,6 +1538,7 @@ class LineTouchTooltipData with EquatableMixin {
     bool? fitInsideHorizontally,
     bool? fitInsideVertically,
     bool? showOnTopOfTheChartBoxArea,
+    this.tooltipBorder = BorderSide.none,
   })  : tooltipBgColor = tooltipBgColor ?? Colors.white,
         tooltipRoundedRadius = tooltipRoundedRadius ?? 4,
         tooltipPadding = tooltipPadding ?? const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -1560,6 +1562,7 @@ class LineTouchTooltipData with EquatableMixin {
         fitInsideHorizontally,
         fitInsideVertically,
         showOnTopOfTheChartBoxArea,
+        tooltipBorder,
       ];
 }
 
