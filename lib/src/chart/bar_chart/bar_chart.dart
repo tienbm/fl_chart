@@ -1,4 +1,4 @@
-import 'package:fl_chart/fl_chart_tbm.dart';
+import 'package:fl_chart/fl_chart.dart';
 import 'package:fl_chart/src/chart/bar_chart/bar_chart_renderer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';

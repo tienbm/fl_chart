@@ -1,5 +1,5 @@
 import '../data_pool.dart';
-import 'package:fl_chart/fl_chart_tbm.dart';
+import 'package:fl_chart/fl_chart.dart';
 import 'package:fl_chart/src/chart/scatter_chart/scatter_chart_helper.dart';
 import 'package:flutter_test/flutter_test.dart';
 

@@ -1,4 +1,4 @@
-import 'package:fl_chart/fl_chart_tbm.dart';
+import 'package:fl_chart/fl_chart.dart';
 
 import 'base_chart_painter.dart';
 
