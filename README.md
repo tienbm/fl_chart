@@ -60,13 +60,3 @@ flutter packages get
 ### And the last but not least 🔥
 ##### :beer: pull requests are welcome!
 
-#### :moneybag: Donation (bitcoin) :moneybag:
-##### I work on this project in my free time because I have my personal life and job. You can push me to work more by donating.
-<img src="https://github.com/imaNNeoFighT/fl_chart/raw/master/repo_files/images/bitcoin_public_key.jpg" width="180" >
-
-`1L7ghKdcmgydmUJAnmYmMaiVjT1LoP4a45`
-
-### Contributing
-
-Check out [CONTRIBUTING.md](https://github.com/imaNNeoFighT/fl_chart/blob/master/CONTRIBUTING.md), which contains a guide for those
-who wish to contribute to FL Chart. Thanks in advance!
